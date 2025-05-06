@@ -8,11 +8,10 @@ In this module, we will integrate a PostgreSQL database with our application. We
 
 .NET Aspire provides built-in support for PostgreSQL through the `Aspire.Hosting.PostgreSQL` package. To set up PostgreSQL:
 
-1. [] Install the required NuGet package in your AppHost project:
+1. [] Install the NuGet package `Aspire.Hosting.PostgreSQL` in your **AppHost** project.
 
-```xml
-<PackageReference Include="Aspire.Hosting.PostgreSQL" Version="9.2.0" />
-```
+   1. Right-click the **AppHost** project in the Solution Explorer and choosing **Manage NuGet Packages**.  
+   2. Browse for the `Aspire.Hosting.PostgreSQL` package and click the install button in the description pane.
 
 1. [] Update the AppHost's Program.cs to add PostgreSQL:
 
@@ -37,11 +36,10 @@ var web = builder.AddProject<Projects.MyWeatherHub>("myweatherhub")
 
 ## Integrating EF Core with PostgreSQL
 
-1. [] Install the required NuGet packages in your web application:
+1. [] Install the required NuGet package in your web application
 
-```xml
-<PackageReference Include="Aspire.Npgsql.EntityFrameworkCore.PostgreSQL" Version="9.2.0" />
-```
+   1. Right-click the **AppHost** project in the Solution Explorer and choosing **Manage NuGet Packages**.  
+   2. Browse for the `Aspire.Npgsql.EntityFrameworkCore.PostgreSQL` package and click the install button in the description pane.
 
 1. [] Create your DbContext class:
 

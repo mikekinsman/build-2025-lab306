@@ -15,6 +15,8 @@ To add the Redis hosting integration to our App Host, we need to install the **A
 Let's add Redis to our App Host:
 
 1. [] Add the `Aspire.Hosting.Redis` NuGet package to the **AppHost** project.
+   1. Right-click the **AppHost** project in the Solution Explorer and choosing **Manage NuGet Packages**.  
+   2. Browse for the **Aspire.Hosting.Redis** package and click the install button in the description pane.
 2. [] Open the **Program.cs** file in the **AppHost** project.
 3. [] Add the following code under **var builder = DistributedApplication.CreateBuilder(args);**
 
@@ -61,17 +63,19 @@ There are two types of caching that we could integrate into our ASP.NET Core app
 We will add the _Output caching_ Redis client integration to our **Api** project. This integration will help us to cache the response of our API in Redis cache.
 
 1. [] Install the `Aspire.StackExchange.Redis.OutputCaching` NuGet package in the **Api** project to get access to the Redis APIs.
-1. [] Open the **Program.cs** file in the **Api** project.
-1. [] Add the following code under the **var builder = WebApplication.CreateBuilder(args);** at the top of the file:
+   1. Right-click the **Api** project in the Solution Explorer and choosing **Manage NuGet Packages**.  
+   2. Browse for the **Aspire.StackExchange.Redis.OutputCaching** package and click the install button in the description pane.
+2. [] Open the **Program.cs** file in the **Api** project.
+3. [] Add the following code under the **var builder = WebApplication.CreateBuilder(args);** at the top of the file:
 
     ```csharp
     builder.AddRedisOutputCache("cache");
     ```
 
     > Note that we are using the "cache" name to reference the Redis cache that we configured in the App Host.
-1. [] The **NwsManager** has already been configured to use Output caching, but with a memory cache. We will update it to use the Redis cache. Open the **NwsManager.cs** file in the **Data** folder.
-1. [] In the **NwsManagerExtensions** class you will find a **AddNwsManager** method.
-1. [] **DELETE** the following code:
+4. [] The **NwsManager** has already been configured to use Output caching, but with a memory cache. We will update it to use the Redis cache. Open the **NwsManager.cs** file in the **Data** folder.
+5. [] In the **NwsManagerExtensions** class you will find a **AddNwsManager** method.
+6. [] **DELETE** the following code:
 
     ```csharp-nocopy
     // Add default output caching
