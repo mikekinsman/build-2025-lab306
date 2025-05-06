@@ -11,27 +11,19 @@
 
 ## Create Service Defaults Project
 
-### Visual Studio & Visual Studio Code
+In this lab, we will be working with Visual Studio 2022.  You can find the **Sample Project** on the desktop of the lab machine and double-clicking that icon will open the project in Visual Studio.
+
 
 1. [] Add a new project to the solution called `ServiceDefaults`:
    - Right-click on the solution and select **Add** > **New Project**.
    - Select the **.NET Aspire Service Defaults** project template.
    - Name the project `ServiceDefaults`.
-   - Click **Next** > **Create**.
+   - Click **Next**
+   - Select **.NET 9.0** for the framework version
+   - Click **Create**.
 
     *Visual Studio*
     ![Visual Studio dialog to add a service defaults project](./images/vs-add-servicedefaults.png)
-
-    *Visual Studio Code*
-    ![Visual Studio Code dialog to add a service defaults project](./images/vsc-add-servicedefaults.png)
-
-### Command Line
-
-1. [] Create a new project using the **dotnet new** command:
-
-   ```bash-notab
-   dotnet new aspire-servicedefaults -n ServiceDefaults
-   ```
 
 ## Configure Service Defaults
 
@@ -49,32 +41,25 @@
    builder.AddServiceDefaults();
    ```
 
-3. [] In both the **Api** and **MyWeatherHub** projects, update their **Program.cs** files,adding the following line immediately after their **var app = builder.Build();** line:
-
-   ```csharp
-   app.MapDefaultEndpoints();
-   ```
-
 ## Run the application
 
-1. [] Run the application using a multiple-project launch configuration in Visual Studio or Visual Studio Code:
-   - Visual Studio: Right click on the **MyWeatherHub** solution and go to properties. Select the **Api** and **MyWeatherHub** as startup projects, select **OK**.
+1. [] Run the application using a multiple-project launch configuration in Visual Studio:
+   - Right click on the **MyWeatherHub** solution and go to properties. Select the **Api** and **MyWeatherHub** as startup projects, select **OK**.
      - ![Visual Studio solution properties](./images/vs-multiproject.png)
      - Click **Start** to start and debug both projects.
-   - Visual Studio Code: Run the **Api** and **MyWeatherHub** projects using the **Run and Debug** panel. We have provided a **launch.json** file with the necessary configurations to run both.
-1. [] Test the application by navigating to the following URLs:
+2. [] Test the application by navigating to the following URLs:
    - `https://localhost:7032/swagger/index.html` - API
    - `https://localhost:7274/` - MyWeatherHub
-2. [] You should see the Swagger UI for the API and the MyWeatherHub home page.
+3. [] You should see the Swagger UI for the API and the MyWeatherHub home page.
    1. [] You can also view the health checks for the API by navigating to `https://localhost:7032/health`.
-3. [] You can also view the health checks for the MyWeatherHub by navigating to `https://localhost:7274/health`.
-4. [] View the logs in the terminal to see the health checks and other telemetry data such as resiliency with Polly:
+4. [] You can also view the health checks for the MyWeatherHub by navigating to `https://localhost:7274/health`.
+5. [] View the logs in the terminal to see the health checks and other telemetry data such as resiliency with Polly:
 
    ```bash-nocode
    Polly: Information: Execution attempt. Source: '-standard//Standard-Retry', Operation Key: '', Result: '200', Handled: 'False', Attempt: '0', Execution Time: '13.0649'
    ```
 
-5. [] Click on 5 different cities and a "random" error will be thrown. You will see the Polly retry policy in action.
+6. [] Click on 5 different cities and a "random" error will be thrown. You will see the Polly retry policy in action.
 
    ```bash-nocode
    Polly: Warning: Execution attempt. Source: '-standard//Standard-Retry', Operation Key: '', Result: '500', Handled: 'True', Attempt: '0', Execution Time: '9732.8258'
