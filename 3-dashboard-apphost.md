@@ -15,6 +15,7 @@ Before continuing, consider some common terminology used in .NET Aspire:
    - Right-click on the solution and select **Add** > **New Project**.
    - Select the **.NET Aspire App Host** project template.
    - Name the project `AppHost`.
+   - Keep the default location suggested in the dialog
    - Click **Next** > **Create**.
 
     *Visual Studio*
@@ -23,7 +24,7 @@ Before continuing, consider some common terminology used in .NET Aspire:
 ## Add Project References
 
 1. [] Add a reference to the **Api** and **MyWeatherHub** projects in the new **AppHost** project:
-   - Right-click on the **AppHost** project and select **Add** > **Reference**.
+   - Right-click on the **AppHost** project and select **Add** > **Project Reference...**.
    - Check the **Api** and **MyWeatherHub** projects and click **OK**.
 
      > [+Hint]: In Visual Studio 2022, you can drag and drop the project onto another project to add a reference.
