@@ -31,19 +31,19 @@ To address these issues, we will use the service discovery functionality provide
 
 When we added **ServiceDefaults** to the projects we automatically enrolled them in the service discovery system. This means that the **MyWeatherHub** project is already configured to use service discovery.
 
-Some services expose multiple, named endpoints. By default, the scheme portion of the URI is used to refer to the name of the endpoint being resolved, e.g. the URI **https://basket** will resolve an endpoint named **https** on the **basket** service. By default in Aspire, project resources declare their endpoints according to the contents of their *launchSettings.json* file, so most projects will by default receive **https** and **http** named endpoints. The scheme portion of the referring URI can include multiple names separated by a **+** character and in preference order, e.g. **https+http://basket** will attempt to resolve the **https** named endpoint, and if not found it will resolve the **http** endpoint, of the **basket** service.
+Some services expose multiple, named endpoints. By default, the scheme portion of the URI is used to refer to the name of the endpoint being resolved, e.g. the URI **https://api** will resolve an endpoint named **https** on the **api** service. By default in .NET Aspire, project resources declare their endpoints according to the contents of their *launchSettings.json* file, so most projects will by default receive **https** and **http** named endpoints. The scheme portion of the referring URI can include multiple names separated by a **+** character and in preference order, e.g. **https+http://api** will attempt to resolve the **https** named endpoint, and if not found it will resolve the **http** endpoint, of the **api** service.
 
-For cases when the named endpoint does not match the intended scheme, they can also be resolved explicitly by specifying the endpoint name in the first sub-domain section of the host portion of the request URI, when the first section is prefixed with an underscore (**_**), following the format **scheme://_endpointName.serviceName**. For example, if a service named "basket" exposes an HTTPS endpoint named "dashboard", then the URI **https+http://_dashboard.basket** can be used to specify this endpoint, for example:
+For cases when the named endpoint does not match the intended scheme, they can also be resolved explicitly by specifying the endpoint name in the first sub-domain section of the host portion of the request URI, when the first section is prefixed with an underscore (**_**), following the format **scheme://_endpointName.serviceName**. For example, if a service named "api" exposes an HTTPS endpoint named "dashboard", then the URI **https+http://_dashboard.api** can be used to specify this endpoint, for example:
 
 ```csharp-nocopy
-builder.Services.AddHttpClient<BasketServiceClient>(
-    static client => client.BaseAddress = new("https+http://basket"));
+builder.Services.AddHttpClient<ApiServiceClient>(
+    static client => client.BaseAddress = new("https+http://api"));
 
-builder.Services.AddHttpClient<BasketServiceDashboardClient>(
-    static client => client.BaseAddress = new("https+http://_dashboard.basket"));
+builder.Services.AddHttpClient<ApiServiceDashboardClient>(
+    static client => client.BaseAddress = new("https+http://_dashboard.api"));
 ```
 
-In the above example, the **BasketServiceClient** will use the **https** or **http** endpoint of the **basket** service, while the **BasketServiceDashboardClient** will use the **dashboard** endpoint of the **basket** service, via either the HTTPS or HTTP schemes, depending on which is available.
+In the above example, the **ApiServiceClient** will use the **https** or **http** endpoint of the **api** service, while the **ApiServiceDashboardClient** will use the **dashboard** endpoint of the **api** service, via either the HTTPS or HTTP schemes, depending on which is available.
 
 Now, let's update the **MyWeatherHub** project to use service discovery to connect to the **Api** service. This can be accomplished by updating the existing **WeatherEndpoint** configuration settings in the **appsettings.json**. This is convenient when enabling .NET Aspire in an existing deployed application as you can continue to use your existing configuration settings.
 
