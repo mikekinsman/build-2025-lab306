@@ -16,7 +16,10 @@ Before continuing, consider some common terminology used in .NET Aspire:
    - Select the **.NET Aspire App Host** project template.
    - Name the project `AppHost`.
    - Keep the default location suggested in the dialog
-   - Click **Next** > **Create**.
+   - Click **Next**
+   - Ensure .NET 9.0 is selected as well as 'Configure for HTTPS' is checked
+   - .NET Aspire version should be set to **9.2**
+   - Click **Create**
 
     *Visual Studio*
     ![Visual Studio dialog to add a app host project](./images/vs-add-apphost.png)
@@ -43,36 +46,20 @@ Before continuing, consider some common terminology used in .NET Aspire:
 
 ## Run the application
 
-1. [] Set the **AppHost** project as the startup project in Visual Studio by right clicking on the **AppHost** and clicking **Set Default Project**.
-1. [] If you are using Visual Studio Code open the **launch.json** and replace all of the contents with the following:
-
-    ```json
-    {
-        "version": "0.2.0",
-        "configurations": [
-            {
-                "name": "Run AppHost",
-                "type": "dotnet",
-                "request": "launch",
-                "projectPath": "${workspaceFolder}\\AppHost\\AppHost.csproj"
-            }
-        ]
-    }
-    ```
-
-1. [] Run the App Host using the **Run and Debug** panel in Visual Studio Code or Visual Studio.
-1. [] The .NET Aspire Dashboard will open in your default browser and display the resources and dependencies of your application.
+1. [] Set the **AppHost** project as the startup project in Visual Studio by right clicking on the **AppHost** and clicking **Set as Startup Project**.
+2. [] Run the App Host using the **Run and Debug** panel in Visual Studio Code or Visual Studio.
+3. [] The .NET Aspire Dashboard will open in your default browser and display the resources and dependencies of your application.
 
     ![.NET Aspire Dashboard](./images/dashboard.png)
 
-2. [] Open the weather page by clicking the Endpoint for the **MyWeatherHub** project resource which will be `https://localhost:7274`.
-3. [] Notice that both the **Api** and **MyWeatherHub** projects are running and can communicate with each other the same way as before using configuration settings.
-4. [] Back on the Aspire Dashboard, click on the **View Logs** button to see the console logs from the **Api** and **MyWeatherHub** projects.
-5. [] Select the **Traces** tab and select **View** on a trace where the API is being called.
+4. [] Open the weather page by clicking the Endpoint for the **MyWeatherHub** project resource which will be `https://localhost:7274`.
+5. [] Notice that both the **Api** and **MyWeatherHub** projects are running and can communicate with each other the same way as before using configuration settings.
+6. [] Back on the Aspire Dashboard, click on the **Console** button to see the console logs from the **Api** and **MyWeatherHub** projects.
+7. [] Select the **Traces** tab and select **View** on a trace where the API is being called.
 
     ![.NET Aspire Dashboard](./images/dashboard-trace.png)
 
-6. [] Explore the **Metrics** tab to see the metrics for the **Api** and **MyWeatherHub** projects.
+8. [] Explore the **Metrics** tab to see the metrics for the **Api** and **MyWeatherHub** projects.
 
     ![.NET Aspire Dashboard](./images/dashboard-metrics.png)
 
