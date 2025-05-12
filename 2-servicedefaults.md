@@ -36,11 +36,16 @@ In this lab, we will be working with Visual Studio 2022.  You can find the **Sam
 
    > Pro Tip: In Visual Studio 2022, you can drag and drop the project onto another project to add a reference.
 
-2. [] In both the **Api** and **MyWeatherHub** projects, update their **Program.cs** files, adding the following line immediately after their **var builder = WebApplication.CreateBuilder(args);** line:
+1. [] In both the **Api** and **MyWeatherHub** projects, update their **Program.cs** files, adding the following line immediately after their **var builder = WebApplication.CreateBuilder(args);** line:
 
    ```csharp
    builder.AddServiceDefaults();
    ```
+1. [] In both the **Api** and **MyWeatherHub** projects, update their **Program.cs** files to add a reference to the new Default Endpoints added by **ServiceDefaults**.  Add this line just before the last `Map*` command in the **Program.cs** file:
+
+ ```csharp
+ builder.MapDefaultEndpoints();
+ ```
 
 ## Run the application
 

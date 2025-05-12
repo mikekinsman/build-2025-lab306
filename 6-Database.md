@@ -33,6 +33,7 @@ To ensure proper application startup, we'll configure the web application to wai
 
 ```csharp
 var web = builder.AddProject<Projects.MyWeatherHub>("myweatherhub")
+    .WithReference(api)
     .WithReference(weatherDb)
     .WaitFor(postgres)  // Ensures database is ready before app starts
     .WithExternalHttpEndpoints();
@@ -42,7 +43,7 @@ var web = builder.AddProject<Projects.MyWeatherHub>("myweatherhub")
 
 1. [] Install the required NuGet package in your web application
 
-   1. Right-click the **AppHost** project in the Solution Explorer and choosing **Manage NuGet Packages**.  
+   1. Right-click the **MyWeatherHub** project in the Solution Explorer and choosing **Manage NuGet Packages**.  
    2. Browse for the `Aspire.Npgsql.EntityFrameworkCore.PostgreSQL` package and click the install button in the description pane.
 1. Create a new folder inside the **MyWeatherHub** project called `Data`
 1. [] Create a new file in the **Data** folder for your DbContext class called `MyWeatherContext`:
