@@ -13,12 +13,16 @@ In this module, we will integrate a PostgreSQL database with our application. We
    1. Right-click the **AppHost** project in the Solution Explorer and choosing **Manage NuGet Packages**.  
    2. Browse for the `Aspire.Hosting.PostgreSQL` package and click the install button in the description pane.
 
-1. [] Update the AppHost's Program.cs to add PostgreSQL:
+1. [] Update the AppHost's Program.cs to add PostgreSQL by adding these lines after the api is declared:
 
 ```csharp
+
+var api = builder.AddProject<Projects.Api>("api")
+    .WithReference(cache);
+
 var postgres = builder.AddPostgres("postgres")
     .WithDataVolume(isReadOnly: false)
-		.WithPgAdmin();
+    .WithPgAdmin();
 
 var weatherDb = postgres.AddDatabase("weatherdb");
 ```
@@ -40,8 +44,8 @@ var web = builder.AddProject<Projects.MyWeatherHub>("myweatherhub")
 
    1. Right-click the **AppHost** project in the Solution Explorer and choosing **Manage NuGet Packages**.  
    2. Browse for the `Aspire.Npgsql.EntityFrameworkCore.PostgreSQL` package and click the install button in the description pane.
-
-1. [] Create your DbContext class:
+1. Create a new folder inside the **MyWeatherHub** project called `Data`
+1. [] Create a new file in the **Data** folder for your DbContext class called `MyWeatherContext`:
 
 ```csharp
 public class MyWeatherContext : DbContext
@@ -61,9 +65,11 @@ public class MyWeatherContext : DbContext
 }
 ```
 
-1. [] Register the DbContext in your application's **Program.cs**:
+1. [] Register the DbContext in the **MyWeatherHub** application's **Program.cs** after the call to **AddServiceDefaults**:
 
 ```csharp
+builder.AddServiceDefaults();
+
 builder.AddNpgsqlDbContext<MyWeatherContext>(connectionName: "weatherdb");
 ```
 
@@ -74,11 +80,16 @@ Note that .NET Aspire handles the connection string configuration automatically.
 ```csharp
 if (app.Environment.IsDevelopment())
 {
-    using (var scope = app.Services.CreateScope())
-    {
-        var context = scope.ServiceProvider.GetRequiredService<MyWeatherContext>();
-        await context.Database.EnsureCreatedAsync();
-    }
+
+  app.UseExceptionHandler("/Error", createScopeForErrors: true);
+  // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+  app.UseHsts();
+
+  using (var scope = app.Services.CreateScope())
+  {
+      var context = scope.ServiceProvider.GetRequiredService<MyWeatherContext>();
+      await context.Database.EnsureCreatedAsync();
+  }
 }
 ```
 
@@ -92,7 +103,7 @@ Now we'll update the web application to support favoriting weather zones and fil
 
 ```csharp
 @using Microsoft.EntityFrameworkCore
-@inject MyWeatherContext DbContext
+@inject MyWeatherContext MyWeatherContext
 ```
 
 1. [] Add these new properties to the **@code** block to support the favorites functionality:
