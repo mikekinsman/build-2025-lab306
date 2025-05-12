@@ -13,7 +13,6 @@
 
 In this lab, we will be working with Visual Studio 2022.  You can find the **Sample Project** on the desktop of the lab machine and double-clicking that icon will open the project in Visual Studio.
 
-
 1. [] Add a new project to the solution called `ServiceDefaults`:
    - Right-click on the solution and select **Add** > **New Project**.
    - Select the **.NET Aspire Service Defaults** project template.
@@ -49,7 +48,7 @@ In this lab, we will be working with Visual Studio 2022.  You can find the **Sam
      - ![Visual Studio solution properties](./images/vs-multiproject.png)
      - Click **Start** to start and debug both projects.
 2. [] Test the application by navigating to the following URLs:
-   - `https://localhost:7032/swagger/index.html` - API
+   - `https://localhost:7032/openapi/v1.json` - API
    - `https://localhost:7274/` - MyWeatherHub
 3. [] You should see the Swagger UI for the API and the MyWeatherHub home page.
    1. [] You can also view the health checks for the API by navigating to `https://localhost:7032/health`.
